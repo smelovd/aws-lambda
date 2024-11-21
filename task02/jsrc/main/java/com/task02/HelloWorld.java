@@ -37,10 +37,10 @@ System.out.println(method);
 	resultMap.put("123","321");
 
 
-	if ("/hello".equals(path) && ) {
+	if ("/hello".equals(path)) {
                 resultMap.put("statusCode", 200);
                // resultMap.put("message", "Hello from Lambda");
-resultMap.put("body", "{\"message\": \"Bad request syntax or unsupported method. Request path: " + path + ". HTTP method: " + method + "\"}");
+resultMap.put("body", "{\"message\": \"Bad request\"}");
                 resultMap.put("headers", new HashMap<String, String>() {{
                     put("Content-Type", "application/json");
                     put("Access-Control-Allow-Origin", "*");
