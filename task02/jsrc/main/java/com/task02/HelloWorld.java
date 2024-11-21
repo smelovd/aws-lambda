@@ -24,8 +24,24 @@ import java.util.Map;
 public class HelloWorld implements RequestHandler<Object, Map<String, Object>> {
 
     public Map<String, Object> handleRequest(Object request, Context context) {
+System.out.println(request);
+Map<String, Object> requestContext = (Map<String, Object>) event.get("requestContext");
+System.out.println(requestContext);
+            Map<String, String> httpContext = (Map<String, String>) requestContext.get("http");
+System.out.println(httpContext);
+            String path = httpContext.get("path");
+System.out.println(path);
+            String method = httpContext.get("method");
+System.out.println(method);
         Map<String, Object> resultMap = new HashMap<>();
 	resultMap.put("123","321");
+
+
+	if ("/hello".equals(path)) {
+                resultMap.put("statusCode", 200);
+                resultMap.put("message", "Hello from Lambda");
+        }
+
         return resultMap;
     }
 }
