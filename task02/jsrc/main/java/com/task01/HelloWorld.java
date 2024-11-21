@@ -16,12 +16,25 @@ import java.util.Map;
 	logsExpiration = RetentionSetting.SYNDICATE_ALIASES_SPECIFIED
 )
 public class HelloWorld implements RequestHandler<Object, Map<String, Object>> {
-
-	public Map<String, Object> handleRequest(Object request, Context context) {
-		System.out.println("Hello from lambda");
-		Map<String, Object> resultMap = new HashMap<String, Object>();
-		resultMap.put("statusCode", 200);
-		resultMap.put("message", "Hello from Lambda");
-		return resultMap;
-	}
+    @Override
+    public Map<String, Object> handleRequest(Map<String, Object> request, Context context) {
+        System.out.println("Received request: " + request);
+        Map<String, Object> resultMap = new HashMap<>();
+        
+        String path = (String) request.get("rawPath");
+        String method = (String) request.get("requestContext.http.method");
+        
+        if ("/hello".equals(path) && "GET".equalsIgnoreCase(method)) {
+            resultMap.put("statusCode", 200);
+            resultMap.put("message", "Hello from Lambda");
+        } else {
+            resultMap.put("statusCode", 400);
+            resultMap.put("message", String.format(
+                "Bad request syntax or unsupported method. Request path: %s. HTTP method: %s",
+                path, method
+            ));
+        }
+        
+        return resultMap;
+    }
 }
