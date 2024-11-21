@@ -6,6 +6,7 @@ import com.syndicate.deployment.annotations.lambda.LambdaHandler;
 import com.syndicate.deployment.model.RetentionSetting;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @LambdaHandler(
@@ -21,7 +22,7 @@ public class HelloWorld implements RequestHandler<Object, Map<String, Object>> {
         String path = (request instanceof Map) ? (String) ((Map) request).get("path") : "";
         String method = (request instanceof Map) ? (String) ((Map) request).get("httpMethod") : "";
 
-        Map<String, Object> resultMap = new HashMap<>();
+        Map<String, Object> resultMap = new LinkedHashMap<>();
         
         if ("/hello".equals(path) && "GET".equalsIgnoreCase(method)) {
             resultMap.put("statusCode", 200);
