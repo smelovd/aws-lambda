@@ -54,6 +54,8 @@ public class HelloWorld implements RequestHandler<Object, Map<String, Object>> {
             resultMap.put("message", "Invalid request format");
         }
 
+        System.out.println("Returning response: " + resultMap);
+
         return resultMap;
     }
 }
