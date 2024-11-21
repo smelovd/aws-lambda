@@ -6,7 +6,6 @@ import com.syndicate.deployment.annotations.lambda.LambdaHandler;
 import com.syndicate.deployment.annotations.lambda.LambdaUrlConfig;
 import com.syndicate.deployment.model.lambda.url.AuthType;
 import com.syndicate.deployment.model.RetentionSetting;
-
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -24,7 +23,8 @@ import java.util.Map;
 public class HelloWorld implements RequestHandler<Object, Map<String, Object>> {
 
     public Map<String, Object> handleRequest(Object request, Context context) {
-System.out.println(request);
+Map<String, Object> event = (Map<String, Object>) request;
+System.out.println(event);
 Map<String, Object> requestContext = (Map<String, Object>) event.get("requestContext");
 System.out.println(requestContext);
             Map<String, String> httpContext = (Map<String, String>) requestContext.get("http");
