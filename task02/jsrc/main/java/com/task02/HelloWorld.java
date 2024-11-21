@@ -18,10 +18,21 @@ import java.util.Map;
 public class HelloWorld implements RequestHandler<Object, Map<String, Object>> {
 
 	public Map<String, Object> handleRequest(Object request, Context context) {
-		System.out.println("Hello from lambda");
-		Map<String, Object> resultMap = new HashMap<String, Object>();
-		resultMap.put("statusCode", 200);
-		resultMap.put("body", "Hello from Lambda");
-		return resultMap;
-	}
+        String path = (request instanceof Map) ? (String) ((Map) request).get("path") : "";
+        String method = (request instanceof Map) ? (String) ((Map) request).get("httpMethod") : "";
+
+        Map<String, Object> resultMap = new HashMap<>();
+        
+        // Check if the request path is '/hello' and the method is 'GET'
+        if ("/hello".equals(path) && "GET".equalsIgnoreCase(method)) {
+            resultMap.put("statusCode", 200);
+            resultMap.put("body", "Hello from Lambda");
+        } else {
+            // For all other paths or methods, return a 400 Bad Request
+            resultMap.put("statusCode", 400);
+            resultMap.put("body", String.format("Bad request syntax or unsupported method. Request path: %s. HTTP method: %s", path, method));
+        }
+
+        return resultMap;
+    }
 }
