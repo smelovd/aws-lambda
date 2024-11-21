@@ -19,7 +19,8 @@ import java.util.Map;
     logsExpiration = RetentionSetting.SYNDICATE_ALIASES_SPECIFIED
 )
 @LambdaUrlConfig(
-    authType = AuthType.NONE
+    authType = AuthType.NONE,
+
 )
 public class HelloWorld implements RequestHandler<Object, Map<String, Object>> {
 
@@ -53,9 +54,11 @@ public class HelloWorld implements RequestHandler<Object, Map<String, Object>> {
             resultMap.put("statusCode", 400);
             resultMap.put("message", "Invalid request format");
         }
+
 	resultMap.put("headers", new HashMap<String, String>() {{
-                    put("Content-Type", "application/json");
-                }});
+                put("Content-Type", "application/json");
+                put("Access-Control-Allow-Origin", "*");
+            }});
 
         System.out.println("Returning response: " + resultMap);
 
