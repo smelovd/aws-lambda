@@ -20,12 +20,12 @@ import java.util.Map;
 	logsExpiration = RetentionSetting.SYNDICATE_ALIASES_SPECIFIED
 )
 @LambdaUrlConfig(
-    authType = AuthType.NONE,  // Choose the appropriate authentication type
-    invokeMode = InvokeMode.BUFFERED // Use Buffered or Synchronous invocation depending on your needs
+    authType = AuthType.NONE
 )
 public class HelloWorld implements RequestHandler<Object, Map<String, Object>> {
 
 	public Map<String, Object> handleRequest(Object request, Context context) {
+	System.out.println(request);
         String path = (request instanceof Map) ? (String) ((Map) request).get("path") : "";
         String method = (request instanceof Map) ? (String) ((Map) request).get("httpMethod") : "";
 
