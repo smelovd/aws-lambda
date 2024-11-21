@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @LambdaHandler(
-    lambdaName = "cmtr-e4ed9c72-hello_world-test",
+    lambdaName = "hello_world",
     roleName = "url_deployment-role",
     isPublishVersion = false,
     aliasName = "${lambdas_alias_name}",
