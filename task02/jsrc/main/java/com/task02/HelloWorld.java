@@ -25,43 +25,8 @@ import java.util.Map;
 public class HelloWorld implements RequestHandler<Object, Map<String, Object>> {
 
     public Map<String, Object> handleRequest(Object request, Context context) {
-        // Log the request for debugging
-        System.out.println("Received event: " + request);
-
-        // Initialize the response map
-        Map<String, Object> resultMap = new LinkedHashMap<>();
-
-        // Check if the request is a Map (expected structure)
-        if (request instanceof Map) {
-            Map<String, Object> event = (Map<String, Object>) request;
-
-            // Extract the path and method from the requestContext
-            Map<String, Object> requestContext = (Map<String, Object>) event.get("requestContext");
-            Map<String, String> httpContext = (Map<String, String>) requestContext.get("http");
-            String path = httpContext.get("path");
-            String method = httpContext.get("method");
-
-            // Check the path and method
-            if ("/hello".equals(path) && "GET".equalsIgnoreCase(method)) {
-                resultMap.put("statusCode", 200);
-                resultMap.put("message", "Hello from Lambda");
-            } else {
-                resultMap.put("statusCode", 400);
-                resultMap.put("message", String.format("Bad request syntax or unsupported method. Request path: %s. HTTP method: %s", path, method));
-            }
-        } else {
-            // Return an error message if the request format is not expected
-            resultMap.put("statusCode", 400);
-            resultMap.put("message", "Invalid request format");
-        }
-
-	resultMap.put("headers", new HashMap<String, String>() {{
-                put("Content-Type", "application/json");
-                put("Access-Control-Allow-Origin", "*");
-            }});
-
-        System.out.println("Returning response: " + resultMap);
-
+        Map<String, Object> resultMap = new HashMap<>();
+	resultMap.put("123","321");
         return resultMap;
     }
 }
