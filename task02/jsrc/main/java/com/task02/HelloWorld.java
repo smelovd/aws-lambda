@@ -31,12 +31,26 @@ public class HelloWorld implements RequestHandler<Object, Map<String, Object>> {
 
         Map<String, Object> resultMap = new LinkedHashMap<>();
         
-        if ("/hello".equals(path) && "GET".equalsIgnoreCase(method)) {
-            resultMap.put("statusCode", 200);
-            resultMap.put("message", "Hello from Lambda");
+        if (request instanceof Map) {
+            Map<String, Object> event = (Map<String, Object>) request;
+            // Extract the path and method from the request
+            String path = (String) ((Map) event.get("requestContext")).get("http").get("path");
+            String method = (String) ((Map) event.get("requestContext")).get("http").get("method");
+
+            // Check the path and method
+            if ("/hello".equals(path) && "GET".equalsIgnoreCase(method)) {
+                resultMap.put("statusCode", 200);
+                resultMap.put("message", "Hello from Lambda");
+		return resultMap;
+            } else {
+                resultMap.put("statusCode", 400);
+                resultMap.put("message", String.format("Bad request syntax or unsupported method. Request path: %s. HTTP method: %s", path, method));
+		return resultMap;
+            }
         } else {
+            // Return an error message if the request format is not expected
             resultMap.put("statusCode", 400);
-            resultMap.put("message", String.format("Bad request syntax or unsupported method. Request path: %s. HTTP method: %s", path, method));
+            resultMap.put("message", "Invalid request format");
         }
 
         return resultMap;
