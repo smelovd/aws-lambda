@@ -15,10 +15,9 @@ import java.util.Map;
 	aliasName = "${lambdas_alias_name}",
 	logsExpiration = RetentionSetting.SYNDICATE_ALIASES_SPECIFIED
 )
-public class HelloWorld implements RequestHandler<Object, Map<String, Object>> {
+public class HelloWorld implements RequestHandler<Map<String, Object>, Map<String, Object>> {
     @Override
     public Map<String, Object> handleRequest(Map<String, Object> request, Context context) {
-        System.out.println("Received request: " + request);
         Map<String, Object> resultMap = new HashMap<>();
         
         String path = (String) request.get("rawPath");
@@ -26,7 +25,7 @@ public class HelloWorld implements RequestHandler<Object, Map<String, Object>> {
         
         if ("/hello".equals(path) && "GET".equalsIgnoreCase(method)) {
             resultMap.put("statusCode", 200);
-            resultMap.put("message", "Hello from Lambda");
+            resultMap.put("message", "Hello World");
         } else {
             resultMap.put("statusCode", 400);
             resultMap.put("message", String.format(
