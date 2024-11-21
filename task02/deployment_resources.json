@@ -6,15 +6,7 @@
           "Action": [
             "logs:CreateLogGroup",
             "logs:CreateLogStream",
-            "logs:PutLogEvents",
-            "dynamodb:GetItem",
-            "dynamodb:Query",
-            "dynamodb:PutItem",
-            "dynamodb:Batch*",
-            "dynamodb:DeleteItem",
-            "ssm:PutParameter",
-            "ssm:GetParameter",
-            "kms:Decrypt"
+            "logs:PutLogEvents"
           ],
           "Effect": "Allow",
           "Resource": "*"
@@ -25,7 +17,7 @@
     "resource_type": "iam_policy",
     "tags": {}
   },
-  "url_deployment-role": {
+  "hello_world-role": {
     "predefined_policies": [],
     "principal_service": "lambda",
     "custom_policies": [
