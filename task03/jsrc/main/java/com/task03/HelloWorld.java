@@ -19,15 +19,15 @@ public class HelloWorld implements RequestHandler<Object, Map<String, Object>> {
         System.out.println("Received request: " + request);
         Map<String, Object> resultMap = new HashMap<>();
         
-        var body = Map.of("message", "Hello from Lambda", "statusCode", 200);
+        // var body = Map.of("message", "Hello from Lambda", "statusCode", 200);
         resultMap.put("statusCode", 200);
-        resultMap.put("body", body);
-        resultMap.put("headers", new HashMap<String, String>() {
-            {
-                put("Content-Type", "application/json");
-                put("Access-Control-Allow-Origin", "*");
-            }
-        });
+        // resultMap.put("body", body);
+        // resultMap.put("headers", new HashMap<String, String>() {
+        //     {
+        //         put("Content-Type", "application/json");
+        //         put("Access-Control-Allow-Origin", "*");
+        //     }
+        // });
 
         System.out.println("Returning response: " + resultMap);
         return resultMap;
