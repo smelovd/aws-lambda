@@ -29,6 +29,7 @@ public class HelloWorld implements RequestHandler<Object, Map<String, Object>> {
             }
         });
 
+        System.out.println("Returning response: " + resultMap);
         return resultMap;
     }
 }
