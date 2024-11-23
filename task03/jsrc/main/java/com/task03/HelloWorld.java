@@ -18,7 +18,7 @@ import java.util.Map;
     logsExpiration = RetentionSetting.SYNDICATE_ALIASES_SPECIFIED
 )
 @LambdaUrlConfig(
-    authType = AuthType.NONE   // No authentication required for public access
+    authType = AuthType.NONE  
 )
 public class HelloWorld implements RequestHandler<Object, Map<String, Object>> {
 
