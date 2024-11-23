@@ -29,48 +29,55 @@ public class HelloWorld implements RequestHandler<Object, Map<String, Object>> {
         // Initialize the response map
         Map<String, Object> resultMap = new HashMap<>();
         
-        if (request instanceof Map) {
-            // Extract the path and method from the request context
-            Map<String, Object> event = (Map<String, Object>) request;
-            Map<String, Object> requestContext = (Map<String, Object>) event.get("requestContext");
-            Map<String, String> httpContext = (Map<String, String>) requestContext.get("http");
-            String path = httpContext.get("path");
-            String method = httpContext.get("method");
+        // if (request instanceof Map) {
+        //     // Extract the path and method from the request context
+        //     Map<String, Object> event = (Map<String, Object>) request;
+        //     Map<String, Object> requestContext = (Map<String, Object>) event.get("requestContext");
+        //     Map<String, String> httpContext = (Map<String, String>) requestContext.get("http");
+        //     String path = httpContext.get("path");
+        //     String method = httpContext.get("method");
 
-            // Log path and method for debugging
-            System.out.println("Path: " + path);
-            System.out.println("Method: " + method);
+        //     // Log path and method for debugging
+        //     System.out.println("Path: " + path);
+        //     System.out.println("Method: " + method);
 
-            // Handling /hello path
-            if ("/hello".equals(path) && "GET".equalsIgnoreCase(method)) {
-                resultMap.put("statusCode", 200);
+        //     // Handling /hello path
+        //     if ("/hello".equals(path) && "GET".equalsIgnoreCase(method)) {
+        //         resultMap.put("statusCode", 200);
+        //         resultMap.put("body", body);
+        //         resultMap.put("headers", new HashMap<String, String>() {{
+        //             put("Content-Type", "application/json");
+        //             put("Access-Control-Allow-Origin", "*");
+        //         }});
+        //     } else {
+        //         // Using String.format to format the error message
+        //         String errorMessage = String.format("Bad request syntax or unsupported method. Request path: %s. HTTP method: %s", path, method);
+        //         resultMap.put("statusCode", 400);
+        //         String body = String.format("{\"message\": \"%s\", \"statusCode\": %d}", errorMessage, 400);
+        //         resultMap.put("body", body);
+        //         resultMap.put("headers", new HashMap<String, String>() {{
+        //             put("Content-Type", "application/json");
+        //             put("Access-Control-Allow-Origin", "*");
+        //         }});
+        //     }
+        // } else {
+        //     // Return an error message for invalid request format
+        //     resultMap.put("statusCode", 400);
+        //     String body = "{\"message\": \"Invalid request format\", \"statusCode\": 400}";
+        //     resultMap.put("body", body);
+        //     resultMap.put("headers", new HashMap<String, String>() {{
+        //         put("Content-Type", "application/json");
+        //         put("Access-Control-Allow-Origin", "*");
+        //     }});
+        // }
+
+        resultMap.put("statusCode", 200);
                 String body = String.format("{\"message\": \"Hello from Lambda\", \"statusCode\": %d}", 200);
                 resultMap.put("body", body);
                 resultMap.put("headers", new HashMap<String, String>() {{
                     put("Content-Type", "application/json");
                     put("Access-Control-Allow-Origin", "*");
                 }});
-            } else {
-                // Using String.format to format the error message
-                String errorMessage = String.format("Bad request syntax or unsupported method. Request path: %s. HTTP method: %s", path, method);
-                resultMap.put("statusCode", 400);
-                String body = String.format("{\"message\": \"%s\", \"statusCode\": %d}", errorMessage, 400);
-                resultMap.put("body", body);
-                resultMap.put("headers", new HashMap<String, String>() {{
-                    put("Content-Type", "application/json");
-                    put("Access-Control-Allow-Origin", "*");
-                }});
-            }
-        } else {
-            // Return an error message for invalid request format
-            resultMap.put("statusCode", 400);
-            String body = "{\"message\": \"Invalid request format\", \"statusCode\": 400}";
-            resultMap.put("body", body);
-            resultMap.put("headers", new HashMap<String, String>() {{
-                put("Content-Type", "application/json");
-                put("Access-Control-Allow-Origin", "*");
-            }});
-        }
 
         // Return the response map
         return resultMap;

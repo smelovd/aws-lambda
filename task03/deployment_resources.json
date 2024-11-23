@@ -45,7 +45,15 @@
           "authorization_type": "NONE",
           "method_request_parameters": {}, 
           "integration_request_body_template": {}, 
-          "responses": [], 
+          "responses": [
+            {
+              "status_code": 200,
+              "response_parameters": {}, 
+              "response_templates": {
+                "application/json": "{\"message\": \"Hello from Lambda\"}"
+              }
+            }
+          ], 
           "integration_responses": [], 
           "default_error_pattern": true,
           "lambda_name": "hello_world",
