@@ -18,7 +18,7 @@ import java.util.Map;
     logsExpiration = RetentionSetting.SYNDICATE_ALIASES_SPECIFIED
 )
 @LambdaUrlConfig(
-    authType = AuthType.AWS_IAM  
+    authType = AuthType.NONE  
 )
 public class HelloWorld implements RequestHandler<Object, Map<String, Object>> {
 
