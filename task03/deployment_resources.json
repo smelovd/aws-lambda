@@ -44,21 +44,28 @@
         "GET": {
           "authorization_type": "NONE",
           "method_request_parameters": {
-            "method.request.querystring.param_name": false
+            "method.request.querystring.name": false
           },
           "integration_request_body_template": {
-                    "application/json": "{\"path\": \"$input.params('path')\", \"method\": \"$context.httpMethod\"}"
+            "application/json": "$input.body"
           },
           "responses": [
             {
               "status_code": 200,
               "response_parameters": {},
               "response_templates": {
-                "application/json": "{\"message\": \"Hello from Lambda\"}"
+                "application/json": ""
               }
             }
           ],
-          "integration_responses": [],
+          "integration_responses": [
+            {
+              "status_code": 200,
+              "response_templates": {
+                "application/json": "$input.body"
+              }
+            }
+          ],
           "default_error_pattern": true,
           "lambda_name": "hello_world",
           "integration_type": "lambda"

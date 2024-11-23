@@ -19,7 +19,7 @@ public class HelloWorld implements RequestHandler<Object, Map<String, Object>> {
         System.out.println("Received request: " + request);
         Map<String, Object> resultMap = new HashMap<>();
         
-        String body = String.format("{\"message\": \"Hello from Lambda\", \"statusCode\": %d}", 200);
+        var body = Map.of("message", "Hello from Lambda", "statusCode", 200);
         resultMap.put("statusCode", 200);
         resultMap.put("body", body);
         resultMap.put("headers", new HashMap<String, String>() {
