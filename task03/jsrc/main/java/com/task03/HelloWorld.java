@@ -17,31 +17,10 @@ public class HelloWorld implements RequestHandler<Object, Map<String, Object>> {
     @Override
     public Map<String, Object> handleRequest(Object request, Context context) {
         System.out.println("Received request: " + request);
-
         Map<String, Object> resultMap = new HashMap<>();
-
-        Map<String, Object> event = (Map<String, Object>) request;
-        System.out.println(event);
-        String path = (String) event.get("path");
-        System.out.println(path);
-        String method = (String) event.get("method");
-        System.out.println(method);
-
-        if ("/hello".equals(path) && "GET".equalsIgnoreCase(method)) {
-            String body = String.format("{\"message\": \"Hello from Lambda\", \"statusCode\": %d}", 200);
-            resultMap.put("statusCode", 200);
-            resultMap.put("body", body);
-            resultMap.put("headers", new HashMap<String, String>() {
-                {
-                    put("Content-Type", "application/json");
-                    put("Access-Control-Allow-Origin", "*");
-                }
-            });
-            return resultMap;
-        }
-        String errorMessage = String.format("Bad request syntax or unsupported method. Request path: %s. HTTP method: %s", path, method);
-        resultMap.put("statusCode", 400);
-        String body = String.format("{\"message\": \"%s\", \"statusCode\": %d}", errorMessage, 400);
+        
+        String body = String.format("{\"message\": \"Hello from Lambda\", \"statusCode\": %d}", 200);
+        resultMap.put("statusCode", 200);
         resultMap.put("body", body);
         resultMap.put("headers", new HashMap<String, String>() {
             {
