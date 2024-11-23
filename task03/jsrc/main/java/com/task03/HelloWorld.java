@@ -43,7 +43,7 @@ public class HelloWorld implements RequestHandler<Object, Map<String, Object>> {
             if ("/hello".equals(path) && "GET".equalsIgnoreCase(method)) {
                 resultMap.put("statusCode", 200);
                 String body = String.format("{\"message\": \"Hello from Lambda\", \"statusCode\": %d}", 200);
-                resultMap.put("body", 1234532523);
+                resultMap.put("body", "{\"1234532523\" : 213123}");
                 resultMap.put("headers", new HashMap<String, String>() {{
                     put("Content-Type", "application/json");
                     put("Access-Control-Allow-Origin", "*");
