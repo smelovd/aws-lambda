@@ -42,6 +42,7 @@
     "resources": {
       "/hello": {
         "GET": {
+          "authorization_type": "AWS_IAM",
           "method_request_parameters": {}, 
           "integration_request_body_template": {}, 
           "responses": [], 
