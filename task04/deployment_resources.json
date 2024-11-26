@@ -16,7 +16,7 @@
             "ssm:GetParameter",
             "kms:Decrypt",
             "lambda:InvokeFunction",
-	    "sqs:ReceiveMessage",
+            "sqs:ReceiveMessage",
             "sqs:DeleteMessage",
             "sqs:GetQueueAttributes",
             "sns:Subscribe"
@@ -65,6 +65,12 @@
     "tags": {}
   },
   "lambda_topic": {
+    "resource_type": "sns_topic",
+    "region": "eu-central-1",
+    "event_sources": [],
+    "tags": {}
+  },
+  "sns_handler": {
     "resource_type": "sns_topic",
     "region": "eu-central-1",
     "event_sources": [],
