@@ -69,7 +69,7 @@
     "region": "eu-central-1",
     "event_sources": [
       {
-        "resource_type": "sqs_trigger",
+        "resource_type": "sns_topic_trigger",
         "target_queue": "async_queue",
         "batch_size": 10
       }
