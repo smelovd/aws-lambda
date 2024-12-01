@@ -7,5 +7,9 @@
     ],
     "resource_type": "iam_role",
     "tags": {}
+  },
+  "lambda-topic": {
+    "resource_type": "sns_topic",
+    "region": "eu-central-1"
   }
 }
