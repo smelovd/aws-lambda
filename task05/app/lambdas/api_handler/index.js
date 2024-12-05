@@ -32,7 +32,7 @@ exports.handler = async (event) => {
         }
 
         const newItem = {
-            TableName: process.env.TABLE_NAME,
+            TableName: "Events",
             Item: {
                 id: uuidv4(),
                 principalId: Number(principalId),
