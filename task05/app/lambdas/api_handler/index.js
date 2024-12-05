@@ -32,7 +32,7 @@ exports.handler = async (event) => {
         }
 
         const newItem = {
-            TableName: "Events",
+            TableName: "cmtr-e4ed9c72-Events-test",
             Item: {
                 id: uuidv4(),
                 principalId: Number(principalId),
