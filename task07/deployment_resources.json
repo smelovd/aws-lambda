@@ -44,6 +44,6 @@
     "rule_type": "schedule",
     "region": "eu-central-1",
     "tags": {},
-    "expression": "0 2 12 ? * * *"
+    "expression": "rate(1 minute)"
   }
 }
