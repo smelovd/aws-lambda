@@ -52,6 +52,7 @@ exports.handler = async (event) => {
         return {
             statusCode: 201,
             body: JSON.stringify({
+                statusCode: 201,
                 message: 'Event stored successfully',
                 item: newItem.Item,
             }),
