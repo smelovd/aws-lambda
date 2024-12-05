@@ -31,7 +31,10 @@
     "resource_type": "api_gateway",
     "deploy_stage": "api",
     "dependencies": [
-      "api_handler"
+      {
+        "resource_name": "api_handler",
+        "resource_type": "lambda"
+      }
     ],
     "resources": {
       "/": {
