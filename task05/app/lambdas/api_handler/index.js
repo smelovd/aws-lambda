@@ -19,7 +19,7 @@ exports.handler = async (event) => {
         console.log('principalId:', principalId);
         console.log('content:', content);
 
-        if (!principalId || typeof content !== 'string') {
+        if (!principalId || !content) {
             return {
                 statusCode: 400,
                 body: JSON.stringify({ 
