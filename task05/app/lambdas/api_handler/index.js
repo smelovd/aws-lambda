@@ -42,6 +42,8 @@ exports.handler = async (event) => {
         }
 
         console.log('newItem:', newItem);
+        //log type of elements
+        console.log("principalId type: " + typeof principalId + ", " + newItem.Item.principalId);
 
         await dynamodb.put(newItem).promise();
 
