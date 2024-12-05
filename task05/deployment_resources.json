@@ -37,18 +37,6 @@
       }
     ],
     "resources": {
-      "/": {
-        "POST": {
-          "authorization_type": "NONE",
-          "method_request_parameters": {
-            "method.request.querystring.name": false
-          },
-          "default_error_pattern": true,
-          "lambda_name": "api_handler",
-          "integration_type": "lambda",
-          "enable_proxy" : true
-        }
-      },
       "/events": {
         "POST": {
           "authorization_type": "NONE",

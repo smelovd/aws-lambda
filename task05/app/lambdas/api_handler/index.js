@@ -1,3 +1,7 @@
+const AWS = require('aws-sdk');
+const { v4: uuidv4 } = require('uuid');
+const dynamodb = new AWS.DynamoDB.DocumentClient();
+
 exports.handler = async (event) => {
     console.log('Received event:', JSON.stringify(event, null, 2));
 
@@ -8,7 +12,6 @@ exports.handler = async (event) => {
             console.log('Received body:', JSON.stringify(event.body, null, 2));
             body = JSON.parse(event.body);
         } else {
-            console.log('No body received');
             body = event
         }
 
@@ -16,7 +19,7 @@ exports.handler = async (event) => {
         console.log('principalId:', principalId);
         console.log('content:', content);
 
-        if (!principalId || typeof principalId !== 'string' || !content || typeof content !== 'string') {
+        if (!principalId || typeof content !== 'string') {
             return {
                 statusCode: 400,
                 body: JSON.stringify({ 
