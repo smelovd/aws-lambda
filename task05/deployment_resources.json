@@ -30,7 +30,9 @@
   "task5_api": {
     "resource_type": "api_gateway",
     "deploy_stage": "api",
-    "dependencies": [],
+    "dependencies": [
+      "lambda-basic-execution"
+    ],
     "resources": {
       "/": {
         "POST": {
