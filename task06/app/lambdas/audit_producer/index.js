@@ -10,7 +10,7 @@ exports.handler = async (event) => {
         modificationTime: new Date().toISOString(),
         newValue: {
             key: event.Records[0].dynamodb.NewImage.key.S,
-            value: event.Records[0].dynamodb.NewImage.value.N
+            value: Number(event.Records[0].dynamodb.NewImage.value.N)
         }
     }
     console.log(JSON.stringify(item, null, 2))
