@@ -16,7 +16,10 @@
             "ssm:GetParameter",
             "kms:Decrypt",
             "dynamodb:DestribeTable",
-            "dynamodb:PutItem"
+            "dynamodb:GetRecords",
+            "dynamodb:GetShardIterator",
+            "dynamodb:DescribeStream",
+            "dynamodb:ListStreams"
           ],
           "Effect": "Allow",
           "Resource": "*"
