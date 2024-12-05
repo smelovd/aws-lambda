@@ -25,7 +25,7 @@ exports.handler = async (event) => {
             id: uuidv4(),
             itemKey: event.Records[0].dynamodb.Keys.key.S,
             modificationTime: new Date().toISOString(),
-            updatedAttribute: event.Records[0].dynamodb.Keys.key.S,
+            updatedAttribute: "value",
             oldValue: Number(event.Records[0].dynamodb.OldImage.value.N),
             newValue: Number(event.Records[0].dynamodb.NewImage.value.N)
         }
