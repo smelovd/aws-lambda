@@ -20,7 +20,9 @@
             "dynamodb:GetRecords",
             "dynamodb:GetShardIterator",
             "dynamodb:DescribeStream",
-            "dynamodb:ListStreams"
+            "dynamodb:ListStreams",
+            "xray:PutTraceSegments",
+            "xray:PutTelemetryRecords"
           ],
           "Effect": "Allow",
           "Resource": "*"
