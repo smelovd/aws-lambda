@@ -7,11 +7,14 @@ exports.handler = async (event) => {
     const httpMethod = event.httpMethod;
     const path = event.path;
 
+    console.log("Event:", event);
     // Parse the body for POST/PUT requests
     let body = {};
     if (event.body) {
         body = JSON.parse(event.body);
     }
+
+    console.log("Body:", body);
 
     try {
         if (httpMethod === 'POST' && path === '/signup') {
