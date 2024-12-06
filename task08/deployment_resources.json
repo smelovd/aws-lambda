@@ -14,7 +14,8 @@
             "dynamodb:DeleteItem",
             "ssm:PutParameter",
             "ssm:GetParameter",
-            "kms:Decrypt"
+            "kms:Decrypt",
+            "lambda:InvokeFunction"
           ],
           "Effect": "Allow",
           "Resource": "*"
@@ -23,6 +24,26 @@
       "Version": "2012-10-17"
     },
     "resource_type": "iam_policy",
+    "tags": {}
+  },
+  "task8_api": {
+    "resource_type": "api_gateway",
+    "deploy_stage": "api",
+    "dependencies": [],
+    "resources": {
+      "/weather": {
+        "GET": {
+          "authorization_type": "NONE",
+          "method_request_parameters": {
+            "method.request.querystring.name": false
+          },
+          "default_error_pattern": true,
+          "lambda_name": "hello_world",
+          "integration_type": "lambda",
+          "enable_proxy" : true
+        }
+      }
+    },
     "tags": {}
   }
 }
