@@ -9,15 +9,8 @@ const WEATHER_TABLE = "Weather";
 exports.handler = async (event) => {
     try {
         console.log("Event:", event);
-        const { latitude, longitude } = event.queryStringParameters || {};
-        console.log(latitude, longitude);
-
-        if (!latitude || !longitude) {
-            return {
-                statusCode: 400,
-                body: JSON.stringify({ error: "Missing 'latitude' or 'longitude' parameter" }),
-            };
-        }
+        const latitude = event.queryStringParameters?.latitude || '50.4375';
+        const longitude = event.queryStringParameters?.longitude || '30.5';
 
         AWSXRay.captureAsyncFunc('fetchWeatherData', async (subsegment) => {
             const response = await axios.get(`https://api.open-meteo.com/v1/forecast`, {
