@@ -9,28 +9,22 @@ const WEATHER_TABLE = "Weather";
 exports.handler = async (event) => {
     try {
         console.log("Event:", event);
-        const latitude = "52.52";
-        const longitude = "13.41";
 
         let weatherData;
         await AWSXRay.captureAsyncFunc('fetchWeatherData', async (subsegment) => {
-            const response = await axios.get(`https://api.open-meteo.com/v1/forecast`, {
-                params: {
-                    latitude,
-                    longitude,
-                    current: "temperature_2m,wind_speed_10m",
-                    hourly: "temperature_2m,relative_humidity_2m,wind_speed_10m",
-                },
-            });
-            weatherData = response.data; // Assign the response data
+            const response = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m`);
+            weatherData = response.data;
             subsegment.close();
         });
+        console.log("Weather data:", weatherData);
 
         // Prepare the item for DynamoDB
         const item = {
             id: uuidv4(),
             forecast: weatherData,
         };
+
+        console.log("Item:", item);
 
         // Store the data in DynamoDB
         await dynamodb
@@ -39,6 +33,8 @@ exports.handler = async (event) => {
                 Item: item,
             })
             .promise();
+        
+        console.log("Item saved successfully");
 
         return {
             statusCode: 200,
