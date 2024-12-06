@@ -4,7 +4,6 @@ const AWSXRay = require('aws-xray-sdk');
 const { v4: uuidv4 } = require('uuid');
 
 const dynamodb = new AWS.DynamoDB.DocumentClient();
-const WEATHER_TABLE = "Weather";
 
 exports.handler = async (event) => {
     try {
@@ -29,22 +28,14 @@ exports.handler = async (event) => {
         // Store the data in DynamoDB
         await dynamodb
             .put({
-                TableName: WEATHER_TABLE,
+                TableName: "cmtr-e4ed9c72-Weather-test",
                 Item: item,
             })
             .promise();
         
         console.log("Item saved successfully");
 
-        return {
-            statusCode: 200,
-            body: JSON.stringify({ message: "Weather data saved successfully", item }),
-        };
     } catch (error) {
         console.error("Error:", error);
-        return {
-            statusCode: 500,
-            body: JSON.stringify({ error: "Internal Server Error" }),
-        };
     }
 };
