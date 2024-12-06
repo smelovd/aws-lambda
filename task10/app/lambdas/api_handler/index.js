@@ -38,6 +38,7 @@ exports.handler = async (event) => {
 
 // Sign up user with Cognito
 async function signUp(body) {
+    console.log("Body:", body);
     const { username, password, email } = body;
     const params = {
         ClientId: "cmtr-e4ed9c72-simple-booking-userpool-test",
@@ -47,8 +48,10 @@ async function signUp(body) {
             { Name: 'email', Value: email },
         ],
     };
+    console.log("Params:", params);
 
     const response = await cognito.signUp(params).promise();
+    console.log("Response:", response);
     return {
         statusCode: 201,
         body: JSON.stringify({ message: 'User created successfully', userSub: response.UserSub }),
@@ -57,6 +60,7 @@ async function signUp(body) {
 
 // Sign in user with Cognito
 async function signIn(body) {
+    console.log("Body:", body);
     const { username, password } = body;
     const params = {
         AuthFlow: 'USER_PASSWORD_AUTH',
@@ -66,8 +70,10 @@ async function signIn(body) {
             PASSWORD: password,
         },
     };
+    console.log("Params:", params);
 
     const response = await cognito.initiateAuth(params).promise();
+    console.log("Response:", response);
     return {
         statusCode: 200,
         body: JSON.stringify({ token: response.AuthenticationResult.IdToken }),
@@ -81,6 +87,7 @@ async function getTables() {
     };
 
     const data = await dynamo.scan(params).promise();
+    console.log("Data:", data);
     return {
         statusCode: 200,
         body: JSON.stringify({ tables: data.Items }),
@@ -89,6 +96,7 @@ async function getTables() {
 
 // Make reservation and store in DynamoDB
 async function makeReservation(body) {
+    console.log("Body:", body);
     const { tableId, customerName, reservationTime } = body;
     const params = {
         TableName: "cmtr-e4ed9c72-Reservations-test",
@@ -99,8 +107,10 @@ async function makeReservation(body) {
             reservationId: `res-${Date.now()}`,
         },
     };
+    console.log("Params:", params);
 
     await dynamo.put(params).promise();
+    console.log("Reservation created successfully");
     return {
         statusCode: 201,
         body: JSON.stringify({ message: 'Reservation created successfully' }),
@@ -109,12 +119,15 @@ async function makeReservation(body) {
 
 // Fetch reservations from DynamoDB
 async function getReservations() {
+    console.log("Fetching reservations");
     const params = {
         TableName: "cmtr-e4ed9c72-Reservations-test",
     };
 
     const data = await dynamo.scan(params).promise();
+    console.log("Data:", data);
     const reservations = data.Items.filter((item) => item.customerName);
+    console.log("Reservations:", reservations);
     return {
         statusCode: 200,
         body: JSON.stringify({ reservations }),
