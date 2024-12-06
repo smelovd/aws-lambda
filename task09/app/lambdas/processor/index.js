@@ -9,8 +9,8 @@ const WEATHER_TABLE = "Weather";
 exports.handler = async (event) => {
     try {
         console.log("Event:", event);
-        const latitude = event.queryStringParameters?.latitude || '50.4375';
-        const longitude = event.queryStringParameters?.longitude || '30.5';
+        const latitude = "52.52";
+        const longitude = "13.41";
 
         let weatherData;
         await AWSXRay.captureAsyncFunc('fetchWeatherData', async (subsegment) => {
@@ -18,7 +18,8 @@ exports.handler = async (event) => {
                 params: {
                     latitude,
                     longitude,
-                    hourly: "temperature_2m,time",
+                    current: "temperature_2m,wind_speed_10m",
+                    hourly: "temperature_2m,relative_humidity_2m,wind_speed_10m",
                 },
             });
             weatherData = response.data; // Assign the response data
