@@ -38,7 +38,7 @@
             "method.request.querystring.name": false
           },
           "default_error_pattern": true,
-          "lambda_name": "hello_world",
+          "lambda_name": "api_handler",
           "integration_type": "lambda",
           "enable_proxy" : true
         }
