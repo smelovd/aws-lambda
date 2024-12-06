@@ -8,12 +8,7 @@ exports.handler = async (event) => {
     const path = event.path;
 
     console.log("Event:", event);
-    // Parse the body for POST/PUT requests
-    let body = {};
-    if (event.body) {
-        body = JSON.parse(event.body);
-    }
-
+    let body = JSON.parse(event)
     console.log("Body:", body);
 
     try {
