@@ -8,18 +8,16 @@ exports.handler = async (event) => {
     const path = event.path;
 
     console.log("Event:", event);
-    let body = JSON.parse(event)
-    console.log("Body:", body);
 
     try {
         if (httpMethod === 'POST' && path === '/signup') {
-            return await signUp(body);
+            return await signUp(event);
         } else if (httpMethod === 'POST' && path === '/signin') {
-            return await signIn(body);
+            return await signIn(event);
         } else if (httpMethod === 'GET' && path === '/tables') {
             return await getTables();
         } else if (httpMethod === 'POST' && path === '/reservations') {
-            return await makeReservation(body);
+            return await makeReservation(event);
         } else if (httpMethod === 'GET' && path === '/reservations') {
             return await getReservations();
         } else {
@@ -37,13 +35,13 @@ exports.handler = async (event) => {
 // Sign up user with Cognito
 async function signUp(body) {
     console.log("Body:", body);
-    const { username, password, email } = body;
+    const { firstName, lastName, password, email } = body;
     const params = {
         ClientId: "cmtr-e4ed9c72-simple-booking-userpool-test",
-        Username: username,
+        Username: email,
         Password: password,
         UserAttributes: [
-            { Name: 'email', Value: email },
+            { firstName: firstName, lastName: lastName },
         ],
     };
     console.log("Params:", params);
@@ -59,12 +57,12 @@ async function signUp(body) {
 // Sign in user with Cognito
 async function signIn(body) {
     console.log("Body:", body);
-    const { username, password } = body;
+    const { email, password } = body;
     const params = {
         AuthFlow: 'USER_PASSWORD_AUTH',
         ClientId: "cmtr-e4ed9c72-simple-booking-userpool-test",
         AuthParameters: {
-            USERNAME: username,
+            USERNAME: email,
             PASSWORD: password,
         },
     };
