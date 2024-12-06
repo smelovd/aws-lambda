@@ -12,7 +12,7 @@ exports.handler = async (event) => {
 
         const params = {
             Bucket: "cmtr-e4ed9c72-uuid-storage-test",
-            Key: new Date().toISOString() + '.json', 
+            Key: new Date().toISOString(), 
             Body: JSON.stringify(body), 
             ContentType: "application/json"
         };
