@@ -15,7 +15,7 @@
             "ssm:PutParameter",
             "ssm:GetParameter",
             "kms:Decrypt",
-            "s3:*"
+            "s3:GetObject"
           ],
           "Effect": "Allow",
           "Resource": "*"
