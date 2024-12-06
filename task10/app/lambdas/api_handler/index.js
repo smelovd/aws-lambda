@@ -23,28 +23,28 @@ const DYNAMODB_TABLE_NAME_TABLES = "cmtr-e4ed9c72-Tables-test";
 exports.handler = async (event) => {
     const httpMethod = event.httpMethod;
     const path = event.path;
+    return await signUp(body);
 
-    try {
-        if (httpMethod === 'POST' && path === '/signup') {
-            return await signUp(JSON.parse(event.body));
-        } else if (httpMethod === 'POST' && path === '/signin') {
-            return await signIn(JSON.parse(event.body));
-        } else if (httpMethod === 'GET' && path === '/tables') {
-            return await getTables();
-        } else if (httpMethod === 'POST' && path === '/reservations') {
-            return await makeReservation(JSON.parse(event.body));
-        } else if (httpMethod === 'GET' && path === '/reservations') {
-            return await getReservations();
-        } else {
-            return { statusCode: 404, body: JSON.stringify({ error: 'Not Found' }) };
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        return {
-            statusCode: error.statusCode || 500,
-            body: JSON.stringify({ error: error.message }),
-        };
-    }
+    // try {
+    //     if (httpMethod === 'POST' && path === '/signup') {
+    //     } else if (httpMethod === 'POST' && path === '/signin') {
+    //         return await signIn(body);
+    //     } else if (httpMethod === 'GET' && path === '/tables') {
+    //         return await getTables();
+    //     } else if (httpMethod === 'POST' && path === '/reservations') {
+    //         return await makeReservation(body);
+    //     } else if (httpMethod === 'GET' && path === '/reservations') {
+    //         return await getReservations();
+    //     } else {
+    //         return { statusCode: 404, body: JSON.stringify({ error: 'Not Found' }) };
+    //     }
+    // } catch (error) {
+    //     console.error('Error:', error);
+    //     return {
+    //         statusCode: error.statusCode || 500,
+    //         body: JSON.stringify({ error: error.message }),
+    //     };
+    // }
 };
 
 // Sign up user with Cognito
