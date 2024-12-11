@@ -73,7 +73,7 @@ async function signUp(body) {
         console.log('Response:', response)
         return await signIn(body);
     } catch (error) {
-        console.error('Error:', error.message);
+        console.error('Error register: ', error.message);
         return { statusCode: 400, body: { statusCode: 400, error: error.message } };
     }
 }
@@ -120,11 +120,13 @@ async function signIn(body) {
 
     try {
         const response = await cognito.initiateAuth(params).promise();
+        console.log('Response:', response)
         return {
             statusCode: 200,
             body: { accessToken: response.UserSub },
         };
     } catch (error) {
+        console.error('Error login:', error.message);
         return {
             statusCode: 400,
             body: { statusCode: 400, error: error.message },
