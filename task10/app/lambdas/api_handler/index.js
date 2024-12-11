@@ -52,10 +52,10 @@ async function signUp(body) {
     try {
         const { firstName, lastName, password, email } = body;
 
-        const validationResult = validateSignupInput(body);
-        if (!validationResult.valid) {
-            throw new Error(validationResult.error);
-        }
+        // const validationResult = validateSignupInput(body);
+        // if (!validationResult.valid) {
+        //     throw new Error(validationResult.error);
+        // }
 
         const params = {
             ClientId: COGNITO_CLIENT_ID,
@@ -72,11 +72,7 @@ async function signUp(body) {
 
         const response = await cognito.signUp(params).promise();
         console.log('Response:', response)
-        return {
-            statusCode: 200,
-            body: JSON.stringify({ accessToken: response.UserSub }),
-            headers: { 'Access-Control-Allow-Origin': '*' }
-        };
+        return await signIn(body);
     } catch (error) {
         console.error('Error:', error.message);
         return { statusCode: 400, body: JSON.stringify({ error: error.message }), headers: { 'Access-Control-Allow-Origin': '*' } };
@@ -127,13 +123,13 @@ async function signIn(body) {
         const response = await cognito.initiateAuth(params).promise();
         return {
             statusCode: 200,
-            body: JSON.stringify({ token: response.UserSub }),
+            body: JSON.stringify({ accessToken: response.UserSub }),
         };
     } catch (error) {
-        if (error.code === 'NotAuthorizedException' || error.code === 'UserNotFoundException') {
-            return { statusCode: 400, body: JSON.stringify({ error: 'Invalid email or password' }) };
-        }
-        throw error;
+        return {
+            statusCode: 400,
+            body: JSON.stringify({ error: error.message }),
+        };
     }
 }
 
