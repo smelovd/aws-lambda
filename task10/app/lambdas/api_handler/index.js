@@ -49,32 +49,32 @@ exports.handler = async (event) => {
 
 // Sign up user with Cognito
 async function signUp(body) {
-    const { firstName, lastName, password, email } = body;
-
-    // Validate input
-    // if (!isValidEmail(email)) {
-    //     console.log('Invalid email format')
-    //     return { statusCode: 400, body: JSON.stringify({ error: 'Invalid email format' }) };
-    // }
-    // if (!isValidPassword(password)) {
-    //     console.log('Invalid password format')
-    //     return { statusCode: 400, body: JSON.stringify({ error: 'Invalid password format' }) };
-    // }
-
-    const params = {
-        ClientId: COGNITO_CLIENT_ID,
-        Username: email,
-        Password: password,
-        UserAttributes: [
-            { Name: 'given_name', Value: firstName },
-            { Name: 'family_name', Value: lastName },
-            { Name: 'email', Value: email },
-        ],
-    };
-
-    console.log('Params:', params)
-
     try {
+        const { firstName, lastName, password, email } = body;
+
+        // Validate input
+        // if (!isValidEmail(email)) {
+        //     console.log('Invalid email format')
+        //     return { statusCode: 400, body: JSON.stringify({ error: 'Invalid email format' }) };
+        // }
+        // if (!isValidPassword(password)) {
+        //     console.log('Invalid password format')
+        //     return { statusCode: 400, body: JSON.stringify({ error: 'Invalid password format' }) };
+        // }
+
+        const params = {
+            ClientId: COGNITO_CLIENT_ID,
+            Username: email,
+            Password: password,
+            UserAttributes: [
+                { Name: 'given_name', Value: firstName },
+                { Name: 'family_name', Value: lastName },
+                { Name: 'email', Value: email },
+            ],
+        };
+
+        console.log('Params:', params)
+
         const response = await cognito.signUp(params).promise();
         console.log('Response:', response)
         return {
@@ -104,7 +104,7 @@ async function signIn(body) {
         const response = await cognito.initiateAuth(params).promise();
         return {
             statusCode: 200,
-            body: JSON.stringify({ token: response.AuthenticationResult.IdToken }),
+            body: JSON.stringify({ token: response.UserSub }),
         };
     } catch (error) {
         if (error.code === 'NotAuthorizedException' || error.code === 'UserNotFoundException') {
