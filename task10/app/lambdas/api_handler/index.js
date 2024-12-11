@@ -51,14 +51,14 @@ async function signUp(body) {
     const { firstName, lastName, password, email } = body;
 
     // Validate input
-    if (!isValidEmail(email)) {
-        console.log('Invalid email format')
-        return { statusCode: 400, body: JSON.stringify({ error: 'Invalid email format' }) };
-    }
-    if (!isValidPassword(password)) {
-        console.log('Invalid password format')
-        return { statusCode: 400, body: JSON.stringify({ error: 'Invalid password format' }) };
-    }
+    // if (!isValidEmail(email)) {
+    //     console.log('Invalid email format')
+    //     return { statusCode: 400, body: JSON.stringify({ error: 'Invalid email format' }) };
+    // }
+    // if (!isValidPassword(password)) {
+    //     console.log('Invalid password format')
+    //     return { statusCode: 400, body: JSON.stringify({ error: 'Invalid password format' }) };
+    // }
 
     const params = {
         ClientId: COGNITO_CLIENT_ID,
