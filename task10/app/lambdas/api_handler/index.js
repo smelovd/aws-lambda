@@ -22,7 +22,7 @@ const DYNAMODB_TABLE_NAME_TABLES = "cmtr-e4ed9c72-Tables-test";
 // Function to handle different events
 exports.handler = async (event) => {
     console.log(event)
-    return await signUp(body);
+    return await signUp(event);
 
     // try {
     //     if (httpMethod === 'POST' && path === '/signup') {
