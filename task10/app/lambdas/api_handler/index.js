@@ -52,15 +52,10 @@ async function signUp(body) {
     try {
         const { firstName, lastName, password, email } = body;
 
-        // Validate input
-        // if (!isValidEmail(email)) {
-        //     console.log('Invalid email format')
-        //     return { statusCode: 400, body: JSON.stringify({ error: 'Invalid email format' }) };
-        // }
-        // if (!isValidPassword(password)) {
-        //     console.log('Invalid password format')
-        //     return { statusCode: 400, body: JSON.stringify({ error: 'Invalid password format' }) };
-        // }
+        const validationResult = validateSignupInput(body);
+        if (!validationResult.valid) {
+            throw new Error(validationResult.error);
+        }
 
         const params = {
             ClientId: COGNITO_CLIENT_ID,
@@ -85,6 +80,33 @@ async function signUp(body) {
         console.error('Error:', error);
         return { statusCode: 400, body: JSON.stringify({ error: 'User already exists' }) };
     }
+}
+
+function validateSignupInput(body) {
+    const { firstName, lastName, email, password } = body;
+
+    // Проверка firstName и lastName (строка, не пустая)
+    if (!firstName || typeof firstName !== 'string' || firstName.trim() === '') {
+        return { valid: false, error: 'Имя (firstName) должно быть строкой и не должно быть пустым' };
+    }
+
+    if (!lastName || typeof lastName !== 'string' || lastName.trim() === '') {
+        return { valid: false, error: 'Фамилия (lastName) должна быть строкой и не должна быть пустой' };
+    }
+
+    // Проверка email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailRegex.test(email)) {
+        return { valid: false, error: 'Некорректный формат email' };
+    }
+
+    // Проверка пароля
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[$%^*-_]).{12,}$/;
+    if (!password || !passwordRegex.test(password)) {
+        return { valid: false, error: 'Пароль должен быть не менее 12 символов, содержать буквы, цифры и хотя бы один из символов "$%^*-_"' };
+    }
+
+    return { valid: true };
 }
 
 // Sign in user with Cognito
