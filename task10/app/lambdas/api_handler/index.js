@@ -15,13 +15,14 @@ function isValidPassword(password) {
 }
 
 // Hardcoded configuration values (Replace with your actual values)
-const COGNITO_CLIENT_ID = "cmtr-e4ed9c72-simple-booking-userpool-test";
+const COGNITO_CLIENT_ID = process.env.cup_client_id; // "cmtr-e4ed9c72-simple-booking-userpool-test";
 const DYNAMODB_TABLE_NAME_RESERVATIONS = "cmtr-e4ed9c72-Reservations-test";
 const DYNAMODB_TABLE_NAME_TABLES = "cmtr-e4ed9c72-Tables-test";
 
 // Function to handle different events
 exports.handler = async (event) => {
     console.log(event)
+    console.log("Cup client id: " + process.env.cup_client_id);
     return await signUp(event);
 
     // try {
