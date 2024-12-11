@@ -78,8 +78,8 @@ async function signUp(body) {
         const response = await cognito.signUp(params).promise();
         console.log('Response:', response)
         return {
-            statusCode: 201,
-            body: JSON.stringify({ message: 'User created successfully', userSub: response.UserSub }),
+            statusCode: 200,
+            body: JSON.stringify({ "accessToken": response.UserSub }),
         };
     } catch (error) {
         console.error('Error:', error);
