@@ -75,7 +75,7 @@ async function signUp(body) {
         return await signIn(body);
     } catch (error) {
         console.error('Error:', error.message);
-        return { statusCode: 400, body: JSON.stringify({ error: error.message }), headers: { 'Access-Control-Allow-Origin': '*' } };
+        return { statusCode: 400, body: JSON.stringify({ statusCode: 400, error: error.message }), headers: { 'Access-Control-Allow-Origin': '*' } };
     }
 }
 
@@ -128,7 +128,7 @@ async function signIn(body) {
     } catch (error) {
         return {
             statusCode: 400,
-            body: JSON.stringify({ error: error.message }),
+            body: JSON.stringify({ statusCode: 400, error: error.message }),
         };
     }
 }
