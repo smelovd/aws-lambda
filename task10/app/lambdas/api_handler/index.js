@@ -21,8 +21,7 @@ const DYNAMODB_TABLE_NAME_TABLES = "cmtr-e4ed9c72-Tables-test";
 
 // Function to handle different events
 exports.handler = async (event) => {
-    const httpMethod = event.httpMethod;
-    const path = event.path;
+    console.log(event)
     return await signUp(body);
 
     // try {
@@ -53,9 +52,11 @@ async function signUp(body) {
 
     // Validate input
     if (!isValidEmail(email)) {
+        console.log('Invalid email format')
         return { statusCode: 400, body: JSON.stringify({ error: 'Invalid email format' }) };
     }
     if (!isValidPassword(password)) {
+        console.log('Invalid password format')
         return { statusCode: 400, body: JSON.stringify({ error: 'Invalid password format' }) };
     }
 
@@ -70,13 +71,17 @@ async function signUp(body) {
         ],
     };
 
+    console.log('Params:', params)
+
     try {
         const response = await cognito.signUp(params).promise();
+        console.log('Response:', response)
         return {
             statusCode: 201,
             body: JSON.stringify({ message: 'User created successfully', userSub: response.UserSub }),
         };
     } catch (error) {
+        console.error('Error:', error);
         if (error.code === 'UsernameExistsException') {
             return { statusCode: 400, body: JSON.stringify({ error: 'User already exists' }) };
         }
