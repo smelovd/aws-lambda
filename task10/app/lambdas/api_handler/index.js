@@ -75,10 +75,11 @@ async function signUp(body) {
         return {
             statusCode: 200,
             body: JSON.stringify({ accessToken: response.UserSub }),
+            headers: { 'Access-Control-Allow-Origin': '*' }
         };
     } catch (error) {
-        console.error('Error:', error);
-        return { statusCode: 400, body: JSON.stringify({ error: 'User already exists' }) };
+        console.error('Error:', error.message);
+        return { statusCode: 400, body: JSON.stringify({ error: error.message }), headers: { 'Access-Control-Allow-Origin': '*' } };
     }
 }
 
