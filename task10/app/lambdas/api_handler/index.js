@@ -79,14 +79,11 @@ async function signUp(body) {
         console.log('Response:', response)
         return {
             statusCode: 200,
-            body: JSON.stringify({ "accessToken": response.UserSub }),
+            body: JSON.stringify({ accessToken: response.UserSub }),
         };
     } catch (error) {
         console.error('Error:', error);
-        if (error.code === 'UsernameExistsException') {
-            return { statusCode: 400, body: JSON.stringify({ error: 'User already exists' }) };
-        }
-        throw error;
+        return { statusCode: 400, body: JSON.stringify({ error: 'User already exists' }) };
     }
 }
 
