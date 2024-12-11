@@ -22,7 +22,6 @@ const DYNAMODB_TABLE_NAME_TABLES = "cmtr-e4ed9c72-Tables-test";
 // Function to handle different events
 exports.handler = async (event) => {
     console.log(event)
-    console.log("Cup client id: " + process.env.cup_client_id);
     return await signUp(event);
 
     // try {
@@ -75,7 +74,7 @@ async function signUp(body) {
         return await signIn(body);
     } catch (error) {
         console.error('Error:', error.message);
-        return { statusCode: 400, body: JSON.stringify({ statusCode: 400, error: error.message }), headers: { 'Access-Control-Allow-Origin': '*' } };
+        return { statusCode: 400, body: { statusCode: 400, error: error.message } };
     }
 }
 
@@ -123,12 +122,12 @@ async function signIn(body) {
         const response = await cognito.initiateAuth(params).promise();
         return {
             statusCode: 200,
-            body: JSON.stringify({ accessToken: response.UserSub }),
+            body: { accessToken: response.UserSub },
         };
     } catch (error) {
         return {
             statusCode: 400,
-            body: JSON.stringify({ statusCode: 400, error: error.message }),
+            body: { statusCode: 400, error: error.message },
         };
     }
 }
