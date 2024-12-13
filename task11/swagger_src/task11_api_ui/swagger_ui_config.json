@@ -2,5 +2,5 @@
   "name": "task11_api_ui",
   "resource_type": "swagger_ui",
   "path_to_spec": "export/updated_oas_v3.json",
-  "target_bucket": "cmtr-e4ed9c72-api-ui-hoster-test"
+  "target_bucket": "api-ui-hoster"
 }
