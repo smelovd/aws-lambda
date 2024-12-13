@@ -1,5 +1,6 @@
 package com.task11;
 
+import com.task11.ApiHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import com.google.gson.Gson;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
