@@ -13,6 +13,7 @@ import com.task11.repositories.TableRepository;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class ReservationService {
@@ -54,7 +55,7 @@ public class ReservationService {
     }
 
     public void checkIfNotOverlapsWithOtherReservation(ReservationPostRequest request) {
-        var potentiallyConflictingReservations =reservationRepository.listReservations()
+        List<ReservationDbEntry> potentiallyConflictingReservations =reservationRepository.listReservations()
                 .stream()
                 .filter(reservationDbEntry -> reservationDbEntry.getTableNumber().equals(request.getTableNumber()))
                 .filter(reservationDbEntry -> reservationDbEntry.getDate().equals(request.getDate()))
