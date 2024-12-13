@@ -208,7 +208,7 @@
             "s3:*"
           ],
           "Resource": [
-            "arn:aws:s3:::cmtr-e4ed9c72-api-ui-hoster-test/*"
+            "*"
           ]
         }
       ]
