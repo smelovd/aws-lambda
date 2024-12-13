@@ -10,8 +10,9 @@ import com.task10jv.services.ReservationService;
 import com.task10jv.services.TableService;
 import com.task10jv.services.UserService;
 
-@LambdaHandler(lambdaName = "cmtr-e4ed9c72-api_handler-test",
+@LambdaHandler(lambdaName = "api_handler",
         roleName = "ApiHandler-role",
+		aliasName = "${lambdas_alias_name}",
         logsExpiration = RetentionSetting.SYNDICATE_ALIASES_SPECIFIED
 )
 public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
