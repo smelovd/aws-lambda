@@ -10,7 +10,7 @@ import com.task10jv.services.ReservationService;
 import com.task10jv.services.TableService;
 import com.task10jv.services.UserService;
 
-@LambdaHandler(lambdaName = "api_handler",
+@LambdaHandler(lambdaName = "cmtr-e4ed9c72-api_handler-test",
         roleName = "ApiHandler-role",
         logsExpiration = RetentionSetting.SYNDICATE_ALIASES_SPECIFIED
 )
