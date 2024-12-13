@@ -41,7 +41,6 @@
             <artifactId>cognitoidentityprovider</artifactId>
             <version>2.25.50</version>
         </dependency>
-        <!--Syndicate annotations-->
         <dependency>
             <groupId>net.sf.aws-syndicate</groupId>
             <artifactId>deployment-configuration-annotations</artifactId>

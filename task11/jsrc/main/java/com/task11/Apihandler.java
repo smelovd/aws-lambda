@@ -12,6 +12,7 @@ import com.task11.services.UserService;
 
 @LambdaHandler(lambdaName = "api_handler",
 		roleName = "ApiHandler-role",
+		isPublishVersion = true,
 		aliasName = "${lambdas_alias_name}",
 		logsExpiration = RetentionSetting.SYNDICATE_ALIASES_SPECIFIED
 )
