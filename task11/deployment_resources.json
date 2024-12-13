@@ -11,7 +11,8 @@
             "cognito-idp:*",
             "ssm:PutParameter",
             "ssm:GetParameter",
-            "kms:Decrypt"
+            "kms:Decrypt",
+            "s3:*"
           ],
           "Effect": "Allow",
           "Resource": "*"
