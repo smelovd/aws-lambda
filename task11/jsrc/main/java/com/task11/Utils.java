@@ -50,6 +50,6 @@ public class Utils {
     }
 
     public static String getResourceNameWithPrefixAndSuffix(String resourceName) {
-        return Apihandler.FUNCTION_NAME.replace("api_handler", resourceName);
+        return ApiHandler.FUNCTION_NAME.replace("api_handler", resourceName);
     }
 }
