@@ -57,6 +57,7 @@ public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, A
 					responseEvent = tableService.handleListTablesRequest();
 				}
 				if (httpMethod.equals("POST")) {
+					System.out.println("Path = " + path);
 					responseEvent = tableService.handleCreateTableRequest(gatewayEvent);
 				}
 			}
