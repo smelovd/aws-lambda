@@ -6,7 +6,7 @@
   },
   "servers": [
     {
-      "url": "https://b93g28742g.execute-api.eu-central-1.amazonaws.com/{basePath}",
+      "url": "https://e4ed9c72.execute-api.eu-central-1.amazonaws.com/{basePath}",
       "variables": {
         "basePath": {
           "default": "api"
