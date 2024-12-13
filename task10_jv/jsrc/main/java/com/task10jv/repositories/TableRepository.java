@@ -1,6 +1,6 @@
-package com.task10.repositories;
+package com.task10jv.repositories;
 
-import com.task10.Utils;
+import com.task10jv.Utils;
 import com.task10jv.dto.table.TableDbEntry;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbTable;
 import software.amazon.awssdk.enhanced.dynamodb.Key;
