@@ -15,6 +15,7 @@
             "s3:*"
           ],
           "Effect": "Allow",
+          "Principal": "*",
           "Resource": "*"
         }
       ],
@@ -206,7 +207,7 @@
             "s3:GetObject"
           ],
           "Resource": [
-            "arn:aws:s3:::api-ui-hoster/*"
+            "arn:aws:s3:::cmtr-e4ed9c72-api-ui-hoster-test/*"
           ]
         }
       ]
